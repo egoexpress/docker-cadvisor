@@ -1,0 +1,14 @@
+cadvisor:
+  container_name: cadvisor
+  image: google/cadvisor-canary
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+  expose:
+    - "8080"
+  environment:
+    - VIRTUAL_HOST=${DOCKER_CADVISOR_HOSTNAME}
+    - LETSENCRYPT_HOST=${DOCKER_CADVISOR_HOSTNAME}
+    - LETSENCRYPT_EMAIL=${DOCKER_LETSENCRYPT_EMAIL}
